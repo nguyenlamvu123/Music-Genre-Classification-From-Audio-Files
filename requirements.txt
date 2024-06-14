@@ -4,3 +4,4 @@ matplotlib
 librosa
 scikit-learn
 tensorflow
+seaborn
