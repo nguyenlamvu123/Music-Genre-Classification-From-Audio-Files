@@ -169,6 +169,32 @@ def extractfeature_(y, sr, filename='_', g='_'):
 
 
 if __name__ == '__main__':
-    df = pd.read_csv(f"{path}/try_running__features_3_sec.csv")  #  if os.path.exists(f"{path}/try_running__features_3_sec.csv") else None
-    y, sr = librosa.load(songname, mono=True, duration=30)
-    to_append = extractfeature(y, sr, filename='_', g='_')
+    import yt_dlp
+
+    URLS = [
+        # 'https://www.youtube.com/watch?v=dlLliwpq8EU',  # rock
+        # 'https://www.youtube.com/watch?v=HL3UutRvADU',  # rock
+        # 'https://www.youtube.com/watch?v=nlas8N7qW7g',  # rock
+        # 'https://www.youtube.com/watch?v=s4P99HTiF64',  # rock
+        # 'https://www.youtube.com/watch?v=1IFKrrGTbAE',  # nhạc trịnh
+        # 'https://www.youtube.com/watch?v=3MT9pZxMIkI',  # nhạc trịnh
+        # 'https://www.youtube.com/watch?v=lFxKzXW_64k',  # thiếu nhi
+        # 'https://www.youtube.com/watch?v=OusCZI3Hf34',  # thiếu nhi
+        'https://www.youtube.com/watch?v=n5d1XU7bmmk',  # thiếu nhi
+    ]
+
+    ydl_opts = {
+        'format': 'm4a/bestaudio/best',
+        # ℹ️ See help(yt_dlp.postprocessor) for a list of available Postprocessors and their arguments
+        'postprocessors': [{  # Extract audio using ffmpeg
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'wav',
+        }]
+    }
+
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        error_code = ydl.download(URLS)
+
+    # df = pd.read_csv(f"{path}/try_running__features_3_sec.csv")  #  if os.path.exists(f"{path}/try_running__features_3_sec.csv") else None
+    # y, sr = librosa.load(songname, mono=True, duration=30)
+    # to_append = extractfeature(y, sr, filename='_', g='_')
