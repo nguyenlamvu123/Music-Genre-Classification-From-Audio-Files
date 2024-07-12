@@ -25,9 +25,9 @@ num_segment = 10
 samples_per_segment = int(sample_rate*100/num_segment)  # số sample trong 100 giây chia ra thành num_segment=10 phần
 
 debug = False
-demo = False
-##pre_dataset = True
+demo = False 
 epochs = 900 if not demo else 5
+deploy = True
 
 converter = LabelEncoder()
 # model = tf.keras.models.load_model("model.keras") if os.path.exists("model.keras") else None
