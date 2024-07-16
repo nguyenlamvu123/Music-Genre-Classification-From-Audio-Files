@@ -8,7 +8,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 path = os.path.dirname(__file__)
 genr_ori = os.path.join(path, 'Data', 'genres_original')
-genres = os.listdir(genr_ori)
+genres = os.listdir(genr_ori) if os.path.exists(genr_ori) else None 
 ##songname = os.path.join(genr_ori, genres[2], f'{genres[2]}.00029.wav')
 
 header = 'filename chroma_stft_mean chroma_stft_var rms_mean rms_var spectral_centroid_mean spectral_centroid_var spectral_bandwidth_mean spectral_bandwidth_var rolloff_mean rolloff_var zero_crossing_rate_mean zero_crossing_rate_var harmony_mean harmony_var perceptr_mean perceptr_var tempo'
@@ -25,9 +25,9 @@ num_segment = 10
 samples_per_segment = int(sample_rate*100/num_segment)  # số sample trong 100 giây chia ra thành num_segment=10 phần
 
 debug = False
-demo = False
-##pre_dataset = True
+demo = False 
 epochs = 900 if not demo else 5
+deploy = True
 
 converter = LabelEncoder()
 # model = tf.keras.models.load_model("model.keras") if os.path.exists("model.keras") else None
